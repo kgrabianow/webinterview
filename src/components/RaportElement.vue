@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 section {
   text-align: left;
   padding-left: 10%;

@@ -88,7 +88,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .right {
   float: right;
   padding: 10px;
@@ -97,7 +97,6 @@ export default {
 
 .left {
   float: left;
-  /* width: 80%; */
 }
 
 .clear {
@@ -160,8 +159,6 @@ li div {
 .isAnswer:nth-child(even) {
   background: #80ff80;
 }
-
-
 
 textarea {
   padding: 10px;

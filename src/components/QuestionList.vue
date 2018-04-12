@@ -593,7 +593,6 @@ export default {
 .question-list {
   list-style-type: none;
   padding: 0px;
-  /* width: 45%; */
   margin: 2.5%;
   float: left;
 }
@@ -607,6 +606,6 @@ export default {
 }
 
 .container {
-  margin: 10px;
+  margin: 25px;
 }
 </style>
