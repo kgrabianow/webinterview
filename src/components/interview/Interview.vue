@@ -8,9 +8,9 @@
   </ul>
 
   <div class="divHeader">
-    <div class="logoLeft"><img src=".././assets/logo.png" width="90px" height="75px" /></div>
-    <div class="logoRight"><img src=".././assets/opineo.png" width="150px" height="60px" /></div>
-    <div class="logoRight"><img src=".././assets/certyfikaty.jpg" width="144px" height="75px" /></div>
+    <div class="logoLeft"><img src="../.././assets/logo.png" width="90px" height="75px" /></div>
+    <div class="logoRight"><img src="../.././assets/opineo.png" width="150px" height="60px" /></div>
+    <div class="logoRight"><img src="../.././assets/certyfikaty.jpg" width="144px" height="75px" /></div>
   </div>
 
   <div class="content">
@@ -43,6 +43,7 @@ export default {
   methods: {
     startInterview() {
       this.duringInterview = true;
+      this.$emit('interview', this.duringInterview);
     },
     writeBrief(lists) {
       this.answered = lists[0];
@@ -50,6 +51,7 @@ export default {
     },
     showBrief() {
       this.duringInterview = false;
+      this.$emit('inteview', this.duringInterview);
     }
   },
   components: {

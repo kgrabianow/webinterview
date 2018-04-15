@@ -1,4 +1,5 @@
 <template>
+<!-- Przycisk odpowiedzi na pytanie -->
 <button @click="click(element)">{{ element }}</button>
 </template>
 
@@ -11,6 +12,7 @@ export default {
     }
   },
   methods: {
+    // Emitowanie zdarzenia onclik przycisku do pytania
     click(element) {
       this.$emit('answer', element);
     }

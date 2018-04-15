@@ -1,14 +1,17 @@
 <template>
 <li v-if="question.visible" :class="{ 'notAnswer': !isAnswered, 'isAnswer': isAnswered }">
 
+  <!-- Wyświetlanie ikony statusu odpowiedzi -->
   <i class="icon right" @click="showDescription()" :class="{ 'icon-edit': !isAnswered, 'icon-check': isAnswered }"></i>
 
   <div class="left">
 
+    <!-- Wyświetlanie numeru pytania oraz pytania -->
     <div @click="showDescription()" class="list-element" :class="{ 'inProgress': isDescription }">
       <h3>{{ question.id }} | {{ question.question }} </h3>
     </div>
 
+    <!-- Wyświetlanie odpowiedzi i notatki dla pytania -->
     <div class="clear">
       <span v-if="!this.isDescription">
         <span :class="{ 'bold': isAnswered}">{{ answer }}</span>
@@ -16,22 +19,28 @@
       </span>
     </div>
 
+    <!-- Wyświetlanie opisu dla pytania -->
     <transition name="fade" appear>
       <div v-if="this.isDescription" class="description">
         {{ question.description }}
       </div>
     </transition>
 
+    <!-- Wyświetlanie przycisków akcji do odpowiedzi -->
     <transition name="fade" appear>
       <div v-show="this.isDescription">
+        <!-- Przyciski -->
         <div>
-
+          <!-- Wyświetlanie przycisków sugerowanych odpowiedzi -->
           <AnswerElement v-for="(answer, index) in question.answers" :element="answer" :key="question.id+index" @answer="handleEvent">
           </AnswerElement>
 
+          <!-- Wyświetlanie przycisku innej odpowiedzi -->
           <button class="warning" @click="setAnswer('Inna odpowiedź')">Inna odpowiedź</button>
         </div>
+        <!-- Textarea -->
         <div>
+          <!-- Wyświetlanie textarea dla odpowiedzi -->
           <textarea type="text" placeholder="Miejsce na notatkę" v-model="answerNote" />
         </div>
       </div>
@@ -49,6 +58,7 @@ import AnswerElement from './AnswerElement';
 export default {
   name: 'Question',
   data() {
+    // Jeśli nie udzielono wcześniej odpowiedzi na pytanie, ustaw domyślne wartości
     if (this.question.answer === "") {
       return {
         isDescription: false,
@@ -66,17 +76,21 @@ export default {
     }
   },
   methods: {
+    // Obsługa pokazywania opisu do pytania
     showDescription() {
       this.isDescription = !this.isDescription
     },
+    // Ustawienie udzielonej odpowiedzi na pytania
     setAnswer: function(answer) {
       this.answer = answer;
       this.isAnswered = true;
       this.isDescription = false;
       this.question.answer = this.answer;
       this.question.answerNote = this.answerNote;
+      // Emitowanie zdarzenia udzielenia/zaznaczenia odpowiedzi do Listy Pytań
       this.$emit('progress', this.question)
     },
+    // Obsługa zdarzenia przyjętego z komponentu niższego
     handleEvent(element) {
       this.setAnswer(element);
     }

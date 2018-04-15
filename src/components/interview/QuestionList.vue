@@ -3,6 +3,7 @@
   <div class="container">
     <ul class="question-list left">
       <h3>Lista pytań do zadania podczas rozmowy</h3>
+      <!-- Wyświetlanie elementów listy przekazanych pytań do zadania -->
       <Question v-for="(question, index) in questions" :question="question" :key="question.id" @progress="update">
       </Question>
     </ul>
@@ -10,6 +11,7 @@
   <div class="container">
     <ul class="question-list right">
       <h3>Lista zadanych pytań</h3>
+      <!-- Wyświetlanie elementów listy pytań, na które uzyskano już odpowiedź -->
       <Question v-for="(answer, index) in answers" :question="answer" :number="answer.id" :key="answer.id">
       </Question>
     </ul>
