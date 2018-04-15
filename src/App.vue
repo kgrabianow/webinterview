@@ -7,13 +7,11 @@
     <li class="menu-element" style="float:left;"><button @click.prevent="view = 'Interview'">Wywiady</button></li>
   </ul>
 
-  <component :is="view" @interview="isInterview">
+  <component :is="view">
     <li class="menu-element" style="float:left;"><button @click.prevent="view = 'App'">Start</button></li>
     <li class="menu-element" style="float:left;"><button @click.prevent="view = 'WebStructure'">Struktura Strony</button></li>
-    <li class="menu-element" style="float:left;"><button :disabled="this.duringInterview" @click.prevent="view = 'Interview'">Wywiady</button></li>
+    <li class="menu-element" style="float:left;"><button @click.prevent="view = 'Interview'">Wywiady</button></li>
   </component>
-
-  <!-- <Interview></Interview> -->
 
 </div>
 </template>
@@ -26,15 +24,11 @@ export default {
   name: 'App',
   data() {
     return {
-      duringInterview: false,
-      duringBuildStructure: false,
       view: ''
     }
   },
   methods: {
-    isInterview(value) {
-      this.duringInterview = value;
-    }
+
   },
   components: {
     Interview,

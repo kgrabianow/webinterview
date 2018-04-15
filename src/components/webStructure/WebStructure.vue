@@ -13,9 +13,14 @@
 
   <div class="content">
     <div class="container">
-      <h2>Struktura Strony</h2>
-      <div class="webArea" @wheel.prevent="zoom" :style="divStyle">
+      <div class="webArea" v-if="this.duringBuildStructure">
+        <h2>Struktura Strony</h2>
         <WebStructureList @removeElement="removeElement" @editDescription="editDescription" @editName="editName" @add="addChilden" :structure="structure" :id="0"></WebStructureList>
+      </div>
+      <div v-else>
+        <h2>Nie pobrano żadnej Struktury</h2>
+        <p>Dostępne akcje:</p>
+        <button @click="startBuildingStructure()">Nowy Schemat</button>
       </div>
     </div>
   </div>
@@ -51,6 +56,10 @@ export default {
     }
   },
   methods: {
+    startBuildingStructure() {
+      this.duringBuildStructure = true;
+      this.$emit('buildStructure', this.duringBuildStructure);
+    },
     // Obsługuje powiększanie diva ze strukturą
     zoom: function(e) {
       if (e.deltaY > 1 && this.level > 0.2) {
