@@ -21,7 +21,7 @@
     </InterviewRaport>
   </div>
 
-  <div class="divFooter">B4AFTER Footer</div>
+  <!-- <div class="divFooter">B4AFTER Footer</div> -->
 
 </div>
 </template>

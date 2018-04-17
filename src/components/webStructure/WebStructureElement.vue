@@ -175,6 +175,6 @@ export default {
 
 .webElement:hover {
   cursor: pointer;
-  background-color: #4dc3ff
+  background-color: #4dc3ff;
 }
 </style>
