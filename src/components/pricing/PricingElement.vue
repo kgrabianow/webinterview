@@ -72,6 +72,7 @@ export default {
 }
 
 .sexContentArea {
+  display: inline-block;
   /* background-color: #ffffff;
   border: 1px solid #4dc3ff; */
   /* margin-top: 75px; */

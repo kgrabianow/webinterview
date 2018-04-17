@@ -18,7 +18,8 @@
   <!-- Widok -->
   <template v-if="!editContentMode">
     <button v-if="isShow" class="editButton right" @click="changeContentMode()"><i class="icon icon-edit"></i></button>
-    <p>{{ section.content }}</p>
+    <p v-html="section.content"></p>
+    <!-- <p>{{ section.content }}</p> -->
   </template>
   <!-- Edycja -->
   <template v-else>
