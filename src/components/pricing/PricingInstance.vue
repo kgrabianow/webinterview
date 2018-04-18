@@ -10,7 +10,8 @@
 
   <div class="pricingElements">
     <h3>Elementy do użycia</h3>
-    <PricingElement @addElement="addElement" v-for="(element, index) in sugesstedSections" :section="element" :key="element.id"></PricingElement>
+    <i class="icon icon-2x icon-search search"></i><input class="inputFinder" type="text" placeholder="Szukaj" v-model="query">
+    <PricingElement @addElement="addElement" v-for="(element, index) in filtered" :section="element" :key="element.id" :used="isUsed(element.id)"></PricingElement>
   </div>
 
 </div>
@@ -24,10 +25,27 @@ export default {
   name: 'PricingInstance',
   data() {
     return {
+      query: ""
+    }
+  },
+  computed: {
+    filtered: function() {
+      // return this.sugesstedSections.filter(section => section.title.toLowerCase().indexOf(this.query.toLowerCase()) !== -1);
 
+      let somethingToReturn = this.sugesstedSections.filter(section =>
+        (section.content[0].content.toLowerCase().indexOf(this.query.toLowerCase()) !== -1) ||
+        (section.content[1].content.toLowerCase().indexOf(this.query.toLowerCase()) !== -1) ||
+        (section.content[2].content.toLowerCase().indexOf(this.query.toLowerCase()) !== -1) ||
+        (section.title.toLowerCase().indexOf(this.query.toLowerCase()) !== -1) ||
+        (section.description.toLowerCase().indexOf(this.query.toLowerCase()) !== -1)
+      );
+      return somethingToReturn;
     }
   },
   methods: {
+    isUsed(val) {
+      return this.used.includes(val);
+    },
     addElement(arrayValue) {
       this.$emit('addElement', arrayValue);
     },
@@ -41,7 +59,7 @@ export default {
       this.$emit('editContent', array);
     },
   },
-  props: ['sections', 'sugesstedSections'],
+  props: ['sections', 'sugesstedSections', 'used'],
   components: {
     PricingElement,
     FeedElement
@@ -50,6 +68,23 @@ export default {
 </script>
 
 <style scoped>
+.inputFinder {
+  padding: 10px;
+  margin-left: 5px;
+  margin-bottom: 15px;
+  background-color: #dddddd;
+  /* color: #666666; */
+  color: #000000;
+  border: 0;
+}
+
+.search {
+  padding: 15px;
+  margin-left: 25px;
+  color: #aaaaaa;
+  /* border: 1px solid black; */
+}
+
 .pricingArea {
   margin: 0 auto;
   max-width: 100%;

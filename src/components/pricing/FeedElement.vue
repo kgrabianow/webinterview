@@ -23,14 +23,16 @@
   </template>
   <!-- Edycja -->
   <template v-else>
-    <textarea type="text" @keydown.enter="contentClicked( getContent() )" class="input-up" v-model="editedContent" />
-    <button class="okButton" @click="contentClicked( getContent() )"><i class="icon icon-check okClick"></i></button>
+    <textarea type="text" id="myTextarea" name="myTextarea" @keydown.enter="contentClicked( getContent() )" class="input-up" v-html="editedContent" v-model="editedContent" />
+    <button class="okButton right" @click="contentClicked( getContent() )"><i class="icon icon-check okClick"></i></button>
   </template>
 
 </section>
 </template>
 
 <script>
+import '../../assets/tinymce/js/tinymce/tinymce.min.js';
+
 export default {
   name: 'FeedElement',
   data() {
@@ -44,8 +46,28 @@ export default {
     }
   },
   methods: {
+    addWYSIWYG() {
+      tinymce.init({
+        selector: '#myTextarea',
+        height: 500,
+        theme: 'modern',
+        plugins: [
+          'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+          'searchreplace wordcount visualblocks visualchars code fullscreen',
+          'insertdatetime media nonbreaking save table contextmenu directionality',
+          'emoticons template paste textcolor colorpicker textpattern imagetools'
+        ],
+        toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        toolbar2: 'print preview media | forecolor backcolor emoticons',
+        image_advtab: true
+      });
+    },
     showElement() {
       this.isShow = !this.isShow;
+      if (this.isShow === false) {
+        this.editTitleMode = false;
+        this.editContentMode = false;
+      }
     },
     getTitle() {
       return this.editedTitle;
@@ -58,6 +80,7 @@ export default {
     },
     changeContentMode() {
       this.editContentMode = !this.editContentMode;
+      // this.addWYSIWYG();
     },
     titleClicked() {
       this.$emit('editTitle', [this.editedTitle, this.section.id]);
@@ -85,8 +108,24 @@ export default {
 
 <style scoped>
 textarea {
-  width: 80%;
-  min-height: 100px;
+
+  width: 100%;
+  min-height: 250px;
+  background-color: #ebebe0;
+  font-family: 'Avenir',
+  Helvetica,
+  Arial,
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: justify;
+  color: #2c3e50;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+textarea::-webkit-scrollbar {
+  width: 0 !important
 }
 
 .right {
@@ -158,6 +197,7 @@ textarea {
 }
 
 .pricingFeed section:hover {
+  padding-left: 20px;
   border-left: 5px solid #4dc3ff;
 }
 

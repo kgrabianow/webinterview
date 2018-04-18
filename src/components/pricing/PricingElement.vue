@@ -1,5 +1,5 @@
 <template>
-<section>
+<section :class="{ 'isUsed': used }">
   <h4>{{ section.title }}<button class="showButton" @click="showElement()"><i class="icon" :class="{ 'icon-arrow-up': isShow, 'icon-arrow-down': !isShow }"></i></button></h4>
   <div v-if="isShow">
     <p>{{ section.description }}</p>
@@ -55,7 +55,7 @@ export default {
       }
     }
   },
-  props: ['section'],
+  props: ['section', 'used'],
   components: {
 
   }
@@ -67,16 +67,22 @@ export default {
   display: none;
 }
 
+.isUsed h4 {
+  text-decoration: line-through;
+  color: #bbbbbb;
+}
+
+.isUsed button {
+  background-color: #ebebe0;
+}
+
+
 .sexSelected {
   background-color: #cccccc;
 }
 
 .sexContentArea {
   display: inline-block;
-  /* background-color: #ffffff;
-  border: 1px solid #4dc3ff; */
-  /* margin-top: 75px; */
-  /* padding: 10px; */
 }
 
 .buttonContainer {
@@ -110,24 +116,15 @@ export default {
   background-color: #4dc3ff;
 }
 
-/* .pricingElements section:nth-child(odd) {
-  background-color: #eeeeee;
-}
-
-.pricingElements section:nth-child(even) {
-  background-color: #dddddd;
-} */
-
 .pricingElements section {
   padding-left: 25px;
   padding-right: 10px;
-  /* padding-top: 5px; */
-  /* padding-bottom: 50px; */
 }
 
 .pricingElements section:hover {
+  padding-left: 30px;
+  padding-right: 0px;
   border-left: 5px solid #4dc3ff;
-  /* padding-bottom: 10px; */
 }
 
 .pricingElements p {}
